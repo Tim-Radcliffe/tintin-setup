@@ -1,0 +1,29 @@
+#NOP .debug {command} {parameters};
+#ALIAS {.debug}
+{
+    #IF {"%0" == ""}
+    {
+        #ECHO {.debug list};
+        #IF {&_debug[] > 0}
+        {
+            #FOREACH {*_debug[]} {v}
+            {
+                #ECHO {$v : $_debug[$v]};
+            };
+        };
+        #RETURN;
+    };
+
+    #IF {"%2" == "on" || "%2" == "ON" || ( "%2" == "" && "$_debug[%1]" == "0" )}
+    {
+        #VAR {_debug[%1]} {1};
+    };
+    #ELSEIF {"$_debug[%1]" == "1" && "%2" != "" && "%2" != "off" && "%2" != "OFF"}
+    {
+        #ECHO {DEBUG: %0};
+    };
+    #ELSE
+    {
+        #VAR {_debug[%1]} {0};
+    };
+};
