@@ -67,7 +67,7 @@
         };
         #ELSE
         {
-            #FOREACH {$my[necromancer][powerdefaults][]} {_necStudy[power]}
+            #FOREACH {*my[necromancer][powerdefaults][]} {_necStudy[power]}
             {
                 #IF {"$my[necromancer][power][$_necStudy[power]]" == ""}
                 {
@@ -84,7 +84,7 @@
             #UNVAR {_necStudy[0]};
             #IF {&_necStudy[] > 0}
             {
-                #FOREACH {$_necStudy[]} {v}
+                #FOREACH {*_necStudy[]} {v}
                 {
                     #WHILE {"*_necStudy[$v][-1]" != ""}
                     {

@@ -29,7 +29,7 @@
 #ACTION {^{>\s|}You consume the %w bioplast}
 {
   #MATH {changeling[bioplasts][@bioplastNum{%2}]} {$changeling[bioplasts][@bioplastNum{%2}] - 1};
-  #FOREACH {$changeling[bioplasts][]} {i}
+  #FOREACH {*changeling[bioplasts][]} {i}
   {
     #IF {"$changeling[bioplasts][$i]" != "0"}
     {
@@ -49,7 +49,7 @@
   #IF {@fSumArray{$changeling[bioplasts]} > 50}
   {
     #VAR {changeling[fuse]} {};
-    #FOREACH {$changeling[bioplasts][]} {v}
+    #FOREACH {*changeling[bioplasts][]} {v}
     {
       #IF {"$changeling[fuse][1]" == "" && $changeling[bioplasts][$v] > 0}
       {

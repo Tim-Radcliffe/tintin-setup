@@ -2,31 +2,60 @@
 {
     #SCREEN get rows {_Screen[temp][rows]};
     #SCREEN get cols {_Screen[temp][cols]};
-#NOP    #FORMAT {_Screen[temp][rows]} {%R};
-#NOP    #FORMAT {_Screen[temp][cols]} {%C};
+
+    #VAR {_Screen[foot][rows]} {1};
+    #VAR {_Screen[left][cols]} {0};
+
+    #VAR {_Screen[full][x]} {1};
+    #VAR {_Screen[full][y]} {1};
+    #VAR {_Screen[head][x]} {1};
+    #VAR {_Screen[head][y]} {1};
+
 
     #IF {"$_Screen[temp][rows]" != "$_Screen[full][rows]"}
     {
         #VAR {_Screen[full][rows]} {$_Screen[temp][rows]};
         #MATH {_Screen[head][rows]} { ( $_Screen[full][rows] / 4 ) + 1 };
-        #MATH {_Screen[body][rows]} { $_Screen[full][rows] - $_Screen[head][rows] - 3 };
-        #SPLIT {$_Screen[head][rows]} {1};        
+        #MATH {_Screen[body][rows]} { $_Screen[full][rows] - $_Screen[head][rows] - $_Screen[foot][rows] };
+        #VAR {_Screen[right][rows]} {$_Screen[body][rows]};
+        #VAR {_Screen[left][rows]} {$_Screen[body][rows]};
+        #MATH {_Screen[body][y]} {$_Screen[head][y] + $_Screen[head][rows]};
+        #MATH {_Screen[foot][y]} {$_Screen[body][y] + $_Screen[body][rows]};
+        #VAR {_Screen[right][y]} {$_Screen[body][y]};
+        #VAR {_Screen[left][y]} {$_Screen[body][y]};
+        #VAR {_Screen[split]} {1};
     };
     
     #IF {"$_Screen[temp][cols]" != "$_Screen[full][cols]"}
     {
         #VAR {_Screen[full][cols]} {$_Screen[temp][cols]};
-        #MATH {_Screen[ColDiff]} {$_Screen[full][cols] - 80};
-        #IF {"$_Screen[ColDiff]" > "0"} 
+        #MATH {_Screen[right][cols]} {$_Screen[full][cols] - 80};
+        #VAR {_Screen[right][cols]} {$_Screen[right][cols]};
+        #IF {$_Screen[right][cols] < 0}
         {
-            #SYSTEM {tmux resize-pane -L -t 0 $_Screen[ColDiff]};
+            #VAR {_Screen[right][cols]} {0};
         };
-        #ELSEIF {"$_Screen[ColDiff]" < "0"}
+        #VAR {_Screen[body][cols]} {$_Screen[full][cols]};
+        #IF {$_Screen[body][cols] > 80}
         {
-            #MATH {_Screen[ColDiff]} {$_Screen[ColDiff] * -1};
-            #SYSTEM {tmux resize-pane -R -t 0 $_Screen[ColDiff]};
+            #VAR {_Screen[body][cols]} {80};
         };
+        #VAR {_Screen[head][cols]} {$_Screen[full][cols]};
+        #VAR {_Screen[foot][cols]} {$_Screen[full][cols]};
+        #VAR {_Screen[head][x]} {1};       
+        #VAR {_Screen[foot][x]} {1};       
+        #VAR {_Screen[left][x]} {1};       
+        #MATH {_Screen[body][x]} {$_Screen[left][x] + $_Screen[left][cols]};
+        #MATH {_Screen[right][x]} {$_Screen[body][x] + $_Screen[body][cols]};       
+        #VAR {_Screen[split]} {1};
     };    
+
+
+    #IF {$_Screen[split]}
+    {
+        #UNVAR {_Screen[split]};
+        #SPLIT {$_Screen[head][rows]} {$_Screen[foot][rows]} {$_Screen[left][cols]} {$_Screen[right][cols]};        
+    };
     
     #UNVAR {_Screen[temp]};
     

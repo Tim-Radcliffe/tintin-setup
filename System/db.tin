@@ -58,7 +58,7 @@
     #VAR {db[temp]} {};
 
     #NOP /* Loop through returned tab-delimited records (if any) and process */;
-    #FOREACH {$db[return][]} {i}
+    #FOREACH {*db[return][]} {i}
     {
       #VAR {db[fieldindex]} {0};
       #MATH {db[recordindex]} {$i - 1};

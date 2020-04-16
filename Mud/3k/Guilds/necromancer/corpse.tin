@@ -130,7 +130,7 @@ auto {add} {corpse} {} {e_necro_gline_C} {};
 #FUNCTION {fMinionPresent}
 {
     #LOCAL {_fMPi} {};
-    #LOCAL {_fMPt};
+    #LOCAL {_fMPt} {};
     #FORMAT {_fMPt} {%n} {$my[necromancer][undead][type]};
     #FOREACH {$room[contents][npc]} {_fMPi}
     {

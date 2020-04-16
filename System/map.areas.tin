@@ -2,7 +2,7 @@
 {
   #MAP {get} {worldsize} {map[worldsize]};
   #MAP {list} {variable} {map[roomlist]};
-  #FOREACH {$map[roomlist][]} {r}
+  #FOREACH {*map[roomlist][]} {r}
   {
     #ECHO {ROOM: $r};
 
@@ -23,7 +23,7 @@
 
   #UNVAR {map[roomlist]};
 
-  #FOREACH {$map[arealist][list][]} {a}
+  #FOREACH {*map[arealist][list][]} {a}
   {
     #ECHO {vnum: %+5d area: %s} {$map[arealist][list][$a]} {$a};
   };
@@ -52,7 +52,7 @@
     };
   };
   
-  #FOREACH {$map[arealist][]} {a}
+  #FOREACH {*map[arealist][]} {a}
   {
     #ECHO {vnum: %+5d area: %s} {$map[arealist][$a]} {$a};
   };  

@@ -270,7 +270,7 @@ event_register {e_15_mins} {h_globals} {.aGlobalSave};
 
     #LIST result CREATE {$_fSS};
 
-    #FOREACH {$result[]} {l} 
+    #FOREACH {*result[]} {l} 
     {
         #LINE SUBSTITUTE VARIABLE 
         {

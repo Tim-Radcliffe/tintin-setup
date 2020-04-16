@@ -24,10 +24,7 @@
   #LINE {STRIP} {#VAR {mip[%3][data]} {%4};};
   #REPLACE {mip[%3][data]} {"} {'};
   .aMipProcessFlag {%3} {$mip[%3][data]};
-  #IF {"$mip[debug]" == "1"}
-  {
-    #ECHO {MIP:%3:$mip[%3][data]};
-  };
+  .debug MIP {%3:$mip[%3][data]};
   #LINE GAG;
 } {1};
 
@@ -140,21 +137,6 @@
   {
     #VAR {mip[gline][%1]} {@fMipColourConv{{%2}}} ;
     event_raise e_mip_gline {%1} {$mip[gline][%1]};
-  };
-};
-
-#NOP ***** Mip Debug *****;
-#ALIAS {.aMipDebug}
-{
-  #NOP %1;
-  #IF {"$mip[debug]" == "1"}
-  {
-    #ECHO {MIP Debugging OFF};
-    #VAR {mip[debug]} {0}
-  }
-  {
-    #ECHO {MIP Debugging ON};
-    #VAR {mip[debug]} {1}
   };
 };
 

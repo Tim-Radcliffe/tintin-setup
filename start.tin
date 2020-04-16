@@ -111,9 +111,9 @@
 };
 .StartMenu;
 
-#ACTION {^#SESSION 'gts' ACTIVATED.}
+#EVENT {SESSION ACTIVATED}
 {
-  .StartMenu;
+  #if {"%0" == "gts"} {.StartMenu}
 }
 
 #CLASS {cStart} {close};

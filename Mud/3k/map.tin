@@ -97,7 +97,7 @@ event_register {e_ansiflag_L} {h_map_room_desc} {.mapRoomDesc};
       };
     };
 
-    #FOREACH {$map[room][roomexits][]} {i}
+    #FOREACH {*map[room][roomexits][]} {i}
     {
       #IF {"$map[dirs][$i]" == ""}
       {

@@ -52,11 +52,11 @@ event_register {e_mip_FFF} {h_window_combo} {.WindowComboStats};
     .WindowComboSplit;
     #UNVAR {_WC[room]};    
     #LIST {_WC[room]} {add} {@fTrunc{{Name  :$map[room][roomname]}{$_WC[split][l]}}};
-    #LIST {_WC[room]} {add} {@fTrunc{{Exits :@fCommaList{$map[room][exit][]}}{$_WC[split][l]}}};
+    #LIST {_WC[room]} {add} {@fTrunc{{Exits :@fCommaList{*map[room][exit][]}}{$_WC[split][l]}}};
     #IF {"$map[room][roomnote]" != ""}
     {
         #LIST {_WC[room]} {add} {Notes :};
-        #FOREACH {$map[room][roomnote][]} {v}
+        #FOREACH {*map[room][roomnote][]} {v}
         {
             #LIST {_WC[room]} {add} {@fTrunc{{$v}{$_WC[split][l]}}};
         };
@@ -70,9 +70,11 @@ event_register {e_mip_FFF} {h_window_combo} {.WindowComboStats};
     .WindowComboSplit;
     #IF {"$_client[version]" > "2.01.1"}
     {
-        #MAP MAP {${_WC[split][r]}x@fScreen{{head}{rows}}} {_WC[mapstring]} {v};
-        #REPLACE {_WC[mapstring]} {\\} {\\\\};
-        #FORMAT {_WC[map]} {%w} {{$_WC[mapstring]}};        
+        #MAP MAP {@fScreen{{head}{rows}}} {${_WC[split][r]}} {LIST} {_WC[map]};
+        #FOREACH {*_WC[map][]} {v}
+        {
+            #REPLACE {_WC[map][$v]} {\\} {\\};
+        };
     };
     #ELSE
     {

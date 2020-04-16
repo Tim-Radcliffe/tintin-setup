@@ -19,7 +19,7 @@
   event_raise e_prompt;
 } {1};
 
-#PROMPT {^>%s$} {<078>%0} {0};
+#PROMPT {^>%s$} {<078>%0} {-1} {};
 
 #ACTION {^{>\s|}%*: Taken}
 {

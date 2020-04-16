@@ -84,9 +84,9 @@
         Will outlive the sun;
         Will be alive to see the end of the universe;
     };
-    #FOREACH {$_aEV[]} {v)
+    #FOREACH {*_aEV[]} {v)
     {
-        #FOREACH {$_aEV[$v][]} {w)
+        #FOREACH {*_aEV[$v][]} {w)
         {
             #SUBSTITUTE {$_aEV[$v][$w]} {($w) - $_aEV[$v][$w]};
         };

@@ -30,7 +30,7 @@
  
 #ALIAS event_remove_handler
 {
-  #FOREACH {${_events[]}} {sublist}
+  #FOREACH {*{_events[]}} {sublist}
   {
     #LINE SUBSTITUTE {VARIABLE} #UNVAR _events[$sublist][%1];
     #IF {"${_events[$sublist]}" == ""} {#LINE SUBSTITUTE {VARIABLE} #UNVAR _events[$sublist]};
@@ -63,7 +63,7 @@
 #ALIAS event_raise
 {
   #IF {"$flags[debug][events]" != ""} {#ECHO {EVENT: %0}};
-  #FOREACH {${_events[%1][]}} {handler}
+  #FOREACH {*{_events[%1][]}} {handler}
   {
     #IF {&{_events[%1][$handler]} != 0}
     {

@@ -37,7 +37,7 @@
 
   #FORMAT {session[time]} {%t} {%R};
 #NOP  #SHOWME {@fLinePad{{$vHPBar}{$session[time] $session[RebootTime] $session[name]}{}}} {1};
-  #ECHO {{@fLinePad{{$vHPBar}{$session[time] $session[RebootTime] $session[name]}{}}}{1}};
+  #ECHO {{@fLinePad{{$vHPBar}{$session[time] $session[RebootTime] $session[name]}{}}}{-2}};
 };
 event_register e_hp_bar h_hp_bar .aHPBar;
 event_register e_mip_FFF h_mip_fff .aHPBar;

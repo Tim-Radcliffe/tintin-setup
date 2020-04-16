@@ -170,9 +170,10 @@
         #VAR {map[file]}        {$_mL[path]/$_mL[area].map};
         #VAR {map[area][path]}  {$_mL[path]};
         #VAR {map[area][name]}  {$_mL[area]};
+	.debug MAP {READ MAP: $path[areas] : $map[file]};
         #MAP {read} {$path[areas]/$map[file]};
 
-        #FOREACH {$_mapVariable[]} {v}
+        #FOREACH {*_mapVariable[]} {v}
         {
             #UNVAR {$v};
         };
@@ -183,9 +184,10 @@
             #KILL {class} {%*@fMapResolvePath{..}/%*};
         };
        
+        .debug MAP {READ FILES: $path[areas]/${_mL[path]}/*.tin}; 
         .file loadall {$path[areas]/${_mL[path]}/*.tin};
 
-        #FOREACH {$_mapVariable[]} {v}
+        #FOREACH {*_mapVariable[]} {v}
         {
             #VAR {$v} {$_mapVariable[$v]};
         };
@@ -452,7 +454,7 @@
     #MAP {list} {roomname} {$room[name]} {variable} {_mFM[currRooms]};
  
     #NOP /* Keep the matches with the most matching room exits */;
-    #FOREACH {$_mFM[currRooms][]} {_mFM[room]}
+    #FOREACH {*_mFM[currRooms][]} {_mFM[room]}
     {
         #MAP AT {$_mFM[room]} {#MAP GET ROOMEXITS {_mFM[mapExits]};};
         #LIST {_mFM[roomExits]} {create} {$room[exits]};
@@ -475,10 +477,10 @@
     };
     #ELSEIF {&_mFM[currRooms][] > 0}
     {
-        #FOREACH {$_mFM[refRooms][]} {r} 
+        #FOREACH {*_mFM[refRooms][]} {r} 
         {
             #MAP AT {$r} {#MAP GET ROOMEXITS {_mFM[exits]};};
-            #FOREACH {$_mFM[exits][]} {e}
+            #FOREACH {*_mFM[exits][]} {e}
             {
                 #IF {"$_mFM[currRooms][$_mFM[exits][$e]]" != ""}
                 {
@@ -520,7 +522,7 @@
   {
     #SHOWME {Room Types:};
     #SHOWME {==========};
-    #FOREACH {$RoomType[]} {t}
+    #FOREACH {*RoomType[]} {t}
     {
       #SHOWME {$RoomType[$t][colour] [$RoomType[$t][symbol]$RoomType[$t][colour]]<099> : $t};
     };
@@ -577,7 +579,7 @@ event_register {e_map_room_exit} {h_map_room_specialexit} {.mapRoomSpecialExit};
     #MAP AT %1 #MAP GET {$v} {result[$v]};
   };
   
-  #FOREACH {$result[roomexits][]} {_fMRI[exit]}
+  #FOREACH {*result[roomexits][]} {_fMRI[exit]}
   {
     #MAP AT %1 #MAP EXIT {$_fMRI[exit]} GET {result[exit][$_fMRI[exit]]};
   };

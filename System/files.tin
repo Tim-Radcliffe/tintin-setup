@@ -31,8 +31,11 @@
 
 #FUNCTION {fFileLoad}
 {
+  .debug FILE {LOAD: %1};
   #CLASS {%1} {kill};
-  #CLASS {%1} {read} {%1};
+  #CLASS {%1} {open};
+  #READ {%1};
+  #CLASS {%1} {close};
   #RETURN;
 };
 

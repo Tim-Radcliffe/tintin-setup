@@ -53,7 +53,7 @@
     {
       #IF {"$map[rooms][+2]" == ""}
       {
-        #FOREACH {$map[rooms][]} {r}
+        #FOREACH {*map[rooms][]} {r}
         {
           #VAR {map[destination]} {$r};
         };
@@ -81,7 +81,7 @@
 
         #VAR {i} {0};
 
-        #FOREACH {$map[rooms][]} {r}
+        #FOREACH {*map[rooms][]} {r}
         {
           #MATH {i} {$i + 1};
           #IF {$i < 27}

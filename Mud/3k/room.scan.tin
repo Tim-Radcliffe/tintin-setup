@@ -154,7 +154,7 @@ event_register {e_ansiflag_R} {h_room_name} {.HandlerRoomName};
 {
   #NOP %1;
   
-  #FOREACH {$RoomScan[object][]} {v}
+  #FOREACH {*RoomScan[object][]} {v}
   {
     #IF {"$RoomScan[break]" != "1"}
     {

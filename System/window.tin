@@ -35,7 +35,7 @@
   #IF {"$window[names][%1]" != "1"}
   {
     #VAR {window[names][%1]} {1};
-    #LIST {window[index]} {CREATE} {$window[names][]};
+    #LIST {window[index]} {CREATE} {*window[names][]};
   };  
 };
 
@@ -43,7 +43,7 @@
 {
     #NOP %1;
     #VAR {_WN} {};
-    #FOREACH {$window[names][]} {w}
+    #FOREACH {*window[names][]} {w}
     {
         #IF {"$w" == "$window[index][1]"}
         {
@@ -86,7 +86,7 @@
     #IF {%2 > 0 && %2 <= $_WRL[rows]}
     {
       #VAR {_WRL[i]} {@fEval{%2 + $_WRL[offset]}};
-      #ECHO {{%-@fScreen{{full}{cols}}s<099>}{@fScreen{{full}{rows}}-%2}} {$window[buffer][$window[index][1]][$_WRL[i]]};
+      #ECHO {{%-@fScreen{{full}{cols}}s<099>}{%2}} {$window[buffer][$window[index][1]][$_WRL[i]]};
     };
   };
 };
