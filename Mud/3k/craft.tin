@@ -57,7 +57,7 @@
 {
     #REGEXP {%0} {{fragment|essence}}
     {
-        #FOREACH {$_craft[quality][specific][]} {i}
+        #FOREACH {*_craft[quality][specific][]} {i}
         {
             #IF {$_craft[satchel][%0][subtotal][$i] >= 5}
             {
@@ -155,26 +155,27 @@
         #IF {$opponent[hp] <= $_craft[entrap][level]}
         {
             #SEND {!entrap $_craft[entrap][name]};
-      event_register e_room_object h_wrangle handler_wrangle;      
-      #ALIAS {handler_wrangle}
-      {
-        #NOP %%%1;
-        #REGEXP {%%%2} {^chaotic essence}
-        {
-          #SEND {!get essence};
-          #SEND {!wrangle};
-          event_remove_handler h_wrangle;          
-          #UNALIAS {handler_wrangle};
-        };
+            event_register e_room_item h_wrangle handler_wrangle;      
+            #ALIAS {handler_wrangle}
+            {
+                #NOP %%%1;
+                .debug CRAFT {WRANGLE: %%%1 : %%%2};
+                #REGEXP {%%%2} {^chaos essence}
+                {
+                    #SEND {!get essence};
+                    #SEND {!wrangle};
+                    event_remove_handler h_wrangle;          
+                    #UNALIAS {handler_wrangle};
+                };
             };
             #UNVAR {_craft[entrap]};
             event_remove_handler h_entrap;
             #UNALIAS {handler_entrap};
         };
     };
-        event_register e_hp_bar h_entrap handler_entrap;
-        event_register e_mip_FFF_L h_entrap handler_entrap;
-        event_register e_killed_opponent h_entrap {event_remove_handler h_entrap};
+    event_register e_hp_bar h_entrap handler_entrap;
+    event_register e_mip_FFF_L h_entrap handler_entrap;
+    event_register e_killed_opponent h_entrap {event_remove_handler h_entrap};
 };
 
 #NOP ############## ITEM LIMITS ###############

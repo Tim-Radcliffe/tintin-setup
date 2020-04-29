@@ -113,7 +113,10 @@
 
 #EVENT {SESSION ACTIVATED}
 {
-  #if {"%0" == "gts"} {.StartMenu}
+  #INFO SESSION SAVE
+  #INFO SYSTEM SAVE
+  #VAR {_info} {$info};
+   #if {"%0" == "gts"} {.StartMenu}
 }
 
 #CLASS {cStart} {close};

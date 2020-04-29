@@ -1,105 +1,115 @@
-#VAR {window} {};
+#VAR {_Window} {};
 
 #NOP {windowname} {windowline} {content};
 #ALIAS {.WindowSetLine}
 {
-  #NOP %1;
-  .WindowCreate {%1};
-  #VAR {window[buffer][%1][%2]} {%3};
-  #VAR {window[update][%1]} {1};
-  .WindowNotify
+    #NOP %1;
+    .WindowCreate {%1};
+    #VAR {_Window[buffer][%1][%2]} {%3};
+    #VAR {_Window[update][%1]} {1};
+    .WindowNotify
 };
 
 #ALIAS {.WindowSet}
 {
-  #NOP %1;
-  .WindowCreate {%1};
-  #VAR {window[buffer][%1]} {%2};
-  #VAR {window[update][%1]} {1};
-  .WindowNotify
+    #NOP %1;
+    .WindowCreate {%1};
+    #VAR {_Window[buffer][%1]} {%2};
+    #VAR {_Window[update][%1]} {1};
+    .WindowNotify
 };
 
 #ALIAS {.WindowAppend}
 {
-  #NOP %1;
-  .WindowCreate {%1};
-  #LIST {window[buffer][%1]} {add} {%2};
-  #VAR {window[tail][%1]} {1};
-  #VAR {window[update][%1]} {1};
-  .WindowNotify
+    #NOP %1;
+    .WindowCreate {%1};
+    #LIST {_Window[buffer][%1]} {add} {%2};
+    #VAR {_Window[tail][%1]} {1};
+    #VAR {_Window[update][%1]} {1};
+    .WindowNotify
 };
 
 #ALIAS {.WindowCreate}
 {
-  #NOP %1;
-  #IF {"$window[names][%1]" != "1"}
-  {
-    #VAR {window[names][%1]} {1};
-    #LIST {window[index]} {CREATE} {*window[names][]};
-  };  
+    #NOP %1;
+    #IF {&_Window[names][%1] == 0}
+    {
+        #IF {"%2" != ""}
+        {
+            #VAR {_Window[names][%1]} {%2};
+        };
+        #ELSE
+        {
+            #IF {@fScreen{{right}{cols}} > 5}
+            {
+                #VAR {_Window[names][%1]} {right};
+            };
+            #ELSE
+            {
+                #VAR {_Window[names][%1]} {head};
+            };
+        };
+        #LIST {_Window[index][$_Window[names][%1]]} {ADD} {%1};
+    };  
 };
 
 #ALIAS {.WindowNotify}
 {
     #NOP %1;
-    #VAR {_WN} {};
-    #FOREACH {*window[names][]} {w}
+    #VAR {_Window[notify]} {};
+    #FOREACH {$_Window[names][1..-1]} {w}
     {
-        #IF {"$w" == "$window[index][1]"}
+        #VAR {_Window[notify][$w][divbegin]} {\/};
+        #VAR {_Window[notify][$w][divend]} {};
+    };
+    #FOREACH {*_Window[names][]} {n}
+    {
+	#VAR {w} {$_Window[names][$n]};
+        #IF {"$n" == "$_Window[index][$w][1]"}
         {
-            #VAR {_WN} {${_WN}>$w< };        
+            #VAR {_Window[notify][$w][text]} {${_Window[notify][$w][text]}<074>\/ $n \\<474>};
+            #VAR {_Window[notify][$w][divbegin]} {};        
+            #VAR {_Window[notify][$w][divend]} {\\};        
         };
-        #ELSEIF {"$window[update][$w]" == "1"}
+        #ELSEIF {"$_Window[update][$n]" == "1"}
         {
-            #VAR {_WN} {${_WN}*$w* };        
+            #VAR {_Window[notify][$w][text]} {${_Window[notify][$w][text]}${_Window[notify][$w][divbegin]}\*$n\*${_Window[notify][$w][divend]}};        
         };
         #ELSE
         {
-            #VAR {_WN} {${_WN} $w  };
+            #VAR {_Window[notify][$w][text]} {${_Window[notify][$w][text]}${_Window[notify][$w][divbegin]} $n ${_Window[notify][$w][divend]}};
         };
     };
-    event_raise {e_notify} {window} {<274>$_WN} {2};    
-    #UNVAR {_WN};
+    #FORMAT {_Window[notify][line]} {%-@fScreen{{body}{cols}}s%-@fScreen{{right}{cols}}s} {$_Window[notify][head][text]} {$_Window[notify][right][text]};
+    event_raise {e_notify} {window} {<474>$_Window[notify][line]} {2};    
 };
 
 #ALIAS {.WindowSwap}
 {
-  #NOP %1;
-  #IF {"$window[index][1]" == "" } {#RETURN;};
-  #LIST {window[index]} {add} {$window[index][1]};
-  #LIST {window[index]} {delete} {1};
-  .WindowRefresh {$window[index][1]};
-  .WindowNotify;
-};
-
-#ALIAS {.WindowRefreshLine}
-{
-  #NOP %1;
-  #IF {"%1" == "$window[index][1]" || "%1" == "" }
-  {
-    #VAR {_WRL[rows]} {@fEval{@fScreen{{head}{rows}}-1}};
-    #VAR {_WRL[offset]}  {&window[buffer][$window[index][1]][] - $_WRL[rows]};
-    #IF {!$window[tail][%1] || $_WRL[offset] < 1}
+    #NOP %1;
+    #FOREACH {*_Window[index][]} {v}
     {
-      #VAR {_WRL[offset]} {0};
+        #IF {"$_Window[index][$v][1]" == "" } {#RETURN;};
+        #LIST {_Window[index][$v]} {add} {$_Window[index][$v][1]};
+        #LIST {_Window[index][$v]} {delete} {1};
+        .WindowRefresh {$_Window[index][$v][1]};
     };
-    #IF {%2 > 0 && %2 <= $_WRL[rows]}
-    {
-      #VAR {_WRL[i]} {@fEval{%2 + $_WRL[offset]}};
-      #ECHO {{%-@fScreen{{full}{cols}}s<099>}{%2}} {$window[buffer][$window[index][1]][$_WRL[i]]};
-    };
-  };
 };
 
 #ALIAS {.WindowRefresh}
 {
-  #NOP %1;
-  #LOOP {1} {@fScreen{{head}{rows}}-1} {i}
-  {
-    .WindowRefreshLine {%1} {$i};
-  };
-  #IF {"%1" == "$window[index][1]"} #VAR {window[update][%1]} {0};
+    #NOP %1;
+    #FOREACH {*_Window[index][]} {s}
+    {
+        #IF {"%1" == "$_Window[index][$s][1]" || "%1" == ""}
+        {
+            #VAR {w} {$_Window[index][$s][1]};
+            #DRAW TILE {{@fScreen{{$s}{y}}}{@fScreen{{$s}{x}}}{@fScreen{{$s}{y2}}}{@fScreen{{$s}{x2}}}} $_Window[buffer][$w][1..-1];
+            #VAR {_Window[update][$w]} {0};
+        };
+    };
+   .WindowNotify;
 };
-event_register {e_screen_resize} {h_window_refresh} {.WindowRefresh {$window[index][1]}};
+event_register {e_screen_resize} {h_window_refresh} {.WindowRefresh {$_Window[index][1]}};
 
 #MACRO {\t} {.WindowSwap};

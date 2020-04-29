@@ -43,8 +43,6 @@
     #LIST {_WC[stats]} {add} {@fGauge{{Vs : $mip[FFF][K][data]}{$mip[FFF][L][data]}{100}{FAA}{$_WC[split][l]}}};
     .WindowComboRefresh;    
 };
-event_register {e_mip_FFF} {h_window_combo} {.WindowComboStats};
-.WindowComboStats;
 
 #ALIAS {.WindowComboRoom}
 {
@@ -86,7 +84,10 @@ event_register {e_mip_FFF} {h_window_combo} {.WindowComboStats};
     .WindowComboRefresh;
 };
 
+.WindowCreate {combo} {head};
+event_register {e_mip_FFF} {h_window_combo} {.WindowComboStats};
 event_register {e_map_refresh} {h_window_combo} {.WindowComboRoom;.WindowComboMap};
 event_register {e_map_room_enter} {h_window_combo} {.WindowComboRoom;.WindowComboMap};
+.WindowComboStats;
 .WindowComboRoom;
 .WindowComboMap;

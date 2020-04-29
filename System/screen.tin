@@ -1,64 +1,98 @@
+#ALIAS {.ScreenInitialise}
+{
+    #SCREEN get rows {_Screen[full][rows]};
+    #SCREEN get cols {_Screen[full][cols]};
+
+    #MATH {_Screen[split][top]} { ( $_Screen[full][rows] / 4 ) + 1 };
+    #MATH {_Screen[split][left]} {0};
+    #MATH {_Screen[split][right]} {$_Screen[full][cols] - 80};
+    #IF {$_Screen[split][right] < 0}
+    {
+        #VAR {_Screen[split][right]} {0};
+    };
+    #VAR {_Screen[split][bottom]} {1};
+};
+
+#ALIAS {.ScreenAdjust}
+{
+
+    #SCREEN get rows {_Screen[full][rows]};
+    #VAR  {_Screen[notify][rows]} {1};
+    #VAR  {_Screen[status][rows]} {1};
+    #MATH {_Screen[head][rows]}   {$_Screen[split][top] - $_Screen[notify][rows]};
+    #MATH {_Screen[body][rows]}   {$_Screen[full][rows] - $_Screen[split][top] - $_Screen[status][rows] - $_Screen[split][bottom]};
+    #VAR  {_Screen[foot][rows]}   {$_Screen[split][bottom]};
+    #VAR  {_Screen[left][rows]}   {$_Screen[body][rows]};
+    #VAR  {_Screen[right][rows]}  {$_Screen[body][rows]};
+
+    #VAR  {_Screen[full][y]}    {1};
+    #MATH {_Screen[full][y2]}   {$_Screen[full][y] + $_Screen[full][rows]};
+
+    #VAR  {_Screen[head][y]}    {1};
+    #MATH {_Screen[head][y2]}   {$_Screen[head][y] + $_Screen[head][rows] - $_Screen[notify][rows]};
+
+    #MATH {_Screen[notify][y]}  {$_Screen[head][y2] + 1};
+    #MATH {_Screen[notify][y2]} {$_Screen[notify][y] + $_Screen[notify][rows]};
+
+    #MATH {_Screen[body][y]}    {$_Screen[head][y] + $_Screen[head][rows] + $_Screen[notify][rows]};
+    #MATH {_Screen[body][y2]}   {$_Screen[body][y] + $_Screen[body][rows] - $_Screen[status][rows]};
+
+    #MATH {_Screen[status][y]}  {$_Screen[body][y2] + 1};
+    #MATH {_Screen[status][y2]} {$_Screen[status][y] + $_Screen[status][rows]};
+
+    #MATH {_Screen[foot][y]}    {$_Screen[status][y2] + 1};
+    #MATH {_Screen[foot][y2]}   {$_Screen[foot][y] + $_Screen[foot][rows]};
+
+    #VAR  {_Screen[left][y]}    {$_Screen[body][y]};
+    #MATH {_Screen[left][y2]}   {$_Screen[body][y2]};
+
+    #VAR  {_Screen[right][y]}    {$_Screen[body][y]};
+    #MATH {_Screen[right][y2]}   {$_Screen[body][y2]};
+
+    #SCREEN get cols {_Screen[full][cols]};
+    #VAR  {_Screen[head][cols]}   {$_Screen[full][cols]};
+    #VAR  {_Screen[notify][cols]} {$_Screen[head][cols]};
+    #VAR  {_Screen[left][cols]}   {$_Screen[split][left]};
+    #MATH {_Screen[body][cols]}   {$_Screen[full][cols] - $_Screen[split][left] - $_Screen[split][right]};
+    #VAR  {_Screen[right][cols]}  {$_Screen[split][right]};
+    #VAR  {_Screen[foot][cols]}   {$_Screen[full][cols]};
+    #VAR  {_Screen[status][cols]} {$_Screen[foot][cols]};
+
+    #VAR  {_Screen[full][x]}  {1};
+    #MATH {_Screen[full][x2]} {$_Screen[full][x] + $_Screen[full][cols]};
+
+    #VAR  {_Screen[head][x]}     {1};
+    #MATH {_Screen[head][x2]}    {$_Screen[head][x] + $_Screen[head][cols]};
+
+    #VAR  {_Screen[notify][x]}   {$_Screen[head][x]};
+    #MATH {_Screen[notify][x2]}  {$_Screen[notify][x] + $_Screen[notify][cols]};
+
+    #VAR  {_Screen[left][x]}     {1};
+    #MATH {_Screen[left][x2]}    {$_Screen[left][x] + $_Screen[left][cols]};
+
+    #MATH {_Screen[body][x]}     {$_Screen[left][x] + $_Screen[left][cols]};
+    #MATH {_Screen[body][x2]}    {$_Screen[body][x] + $_Screen[body][cols]};
+
+    #MATH {_Screen[right][x]}    {$_Screen[body][x] + $_Screen[body][cols]};       
+    #MATH {_Screen[right][x2]}   {$_Screen[right][x] + $_Screen[right][cols]};
+
+    #VAR  {_Screen[foot][x]}     {1};
+    #MATH {_Screen[foot][x2]}    {$_Screen[foot][x] + $_Screen[foot][cols]};
+
+    #VAR  {_Screen[status][x]}   {$_Screen[foot][x]};
+    #MATH {_Screen[status][x2]}  {$_Screen[status][x] + $_Screen[status][cols]};
+
+    #SPLIT {$_Screen[split][top]} {$_Screen[split][bottom]} {$_Screen[split][left]} {$_Screen[split][right]};        
+};
+
 #FUNCTION {fScreen}
 {
-    #SCREEN get rows {_Screen[temp][rows]};
-    #SCREEN get cols {_Screen[temp][cols]};
 
-    #VAR {_Screen[foot][rows]} {1};
-    #VAR {_Screen[left][cols]} {0};
-
-    #VAR {_Screen[full][x]} {1};
-    #VAR {_Screen[full][y]} {1};
-    #VAR {_Screen[head][x]} {1};
-    #VAR {_Screen[head][y]} {1};
-
-
-    #IF {"$_Screen[temp][rows]" != "$_Screen[full][rows]"}
+    #IF {&_Screen[split] == 0}
     {
-        #VAR {_Screen[full][rows]} {$_Screen[temp][rows]};
-        #MATH {_Screen[head][rows]} { ( $_Screen[full][rows] / 4 ) + 1 };
-        #MATH {_Screen[body][rows]} { $_Screen[full][rows] - $_Screen[head][rows] - $_Screen[foot][rows] };
-        #VAR {_Screen[right][rows]} {$_Screen[body][rows]};
-        #VAR {_Screen[left][rows]} {$_Screen[body][rows]};
-        #MATH {_Screen[body][y]} {$_Screen[head][y] + $_Screen[head][rows]};
-        #MATH {_Screen[foot][y]} {$_Screen[body][y] + $_Screen[body][rows]};
-        #VAR {_Screen[right][y]} {$_Screen[body][y]};
-        #VAR {_Screen[left][y]} {$_Screen[body][y]};
-        #VAR {_Screen[split]} {1};
+        .ScreenInitialise;
     };
-    
-    #IF {"$_Screen[temp][cols]" != "$_Screen[full][cols]"}
-    {
-        #VAR {_Screen[full][cols]} {$_Screen[temp][cols]};
-        #MATH {_Screen[right][cols]} {$_Screen[full][cols] - 80};
-        #VAR {_Screen[right][cols]} {$_Screen[right][cols]};
-        #IF {$_Screen[right][cols] < 0}
-        {
-            #VAR {_Screen[right][cols]} {0};
-        };
-        #VAR {_Screen[body][cols]} {$_Screen[full][cols]};
-        #IF {$_Screen[body][cols] > 80}
-        {
-            #VAR {_Screen[body][cols]} {80};
-        };
-        #VAR {_Screen[head][cols]} {$_Screen[full][cols]};
-        #VAR {_Screen[foot][cols]} {$_Screen[full][cols]};
-        #VAR {_Screen[head][x]} {1};       
-        #VAR {_Screen[foot][x]} {1};       
-        #VAR {_Screen[left][x]} {1};       
-        #MATH {_Screen[body][x]} {$_Screen[left][x] + $_Screen[left][cols]};
-        #MATH {_Screen[right][x]} {$_Screen[body][x] + $_Screen[body][cols]};       
-        #VAR {_Screen[split]} {1};
-    };    
 
-
-    #IF {$_Screen[split]}
-    {
-        #UNVAR {_Screen[split]};
-        #SPLIT {$_Screen[head][rows]} {$_Screen[foot][rows]} {$_Screen[left][cols]} {$_Screen[right][cols]};        
-    };
-    
-    #UNVAR {_Screen[temp]};
-    
     #IF {"%1" != ""} 
     {
         #IF {"%2" != ""}
@@ -72,8 +106,12 @@
 
 #EVENT {SCREEN RESIZE}
 {
-    #VAR {result} {@fScreen{}};
+    .ScreenInitialise;
+    .ScreenAdjust;
     event_raise {e_screen_resize};
 };
+
+.ScreenInitialise;
+.ScreenAdjust;
 
 #VAR {result} {@fScreen{}};

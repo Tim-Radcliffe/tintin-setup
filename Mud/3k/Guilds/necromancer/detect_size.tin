@@ -1,0 +1,19 @@
+#ALIAS {handler_auto_detectsize}
+{
+    #NOP %1;
+    #IF {"%2" != ""}
+    {
+        #ACTION {^{\s+1\).{20}\s+(\d+)\s+\*(.*)}$}
+        {
+            #MATH {mob[%%3][size]} {(($mob[%%3][size] * $mob[%%3][kills]) + %%2) / ($mob[%%3][kills] + 1)};
+	    #MATH {mob[%%3][kills]} {$mob[%%3][kills] + 1};
+            .debug GUILD {SIZE: %%3 : $mob[%%3][size] : $mob[%%3][kills] : %%2};
+            #UNACTION {^{\s+1\).{20}\s+(\d+)\s+\*(.*)}$};        
+        } {3};
+
+        #SEND {!gs3};
+        #SEND {!gs3 clear};
+    };
+};
+event_register e_mobscan_end {detect_size.tin} {handler_auto_detectsize};
+

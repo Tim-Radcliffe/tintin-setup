@@ -96,7 +96,7 @@ auto {add} {corpse} {} {e_necro_gline_C} {};
     #IF {$my[corpse][held][current] >= $my[corpse][held][max]}
     {
         #LOCAL {_hcg[min]} {0};
-        #FOREACH {$my[corpse][held][list][]} {_hcg[i]}
+        #FOREACH {*my[corpse][held][list][]} {_hcg[i]}
         {
             #IF {$my[corpse][held][list][$_hcg[i]] < $my[corpse][held][list][$_hcg[min]]}
             {
