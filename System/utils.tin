@@ -3,7 +3,7 @@
     #NOP %1;
     #CLASS {cGlobalVars} {write} {$path[profile]/$session[name].data.tin};
 }
-event_register {e_15_mins} {h_globals} {.aGlobalSave};
+event_register {e_5_mins} {h_globals} {.aGlobalSave};
 
 #ALIAS {.aGlobalVar}
 {
@@ -278,4 +278,9 @@ event_register {e_15_mins} {h_globals} {.aGlobalSave};
             #REPLACE {result[$l]} {+SP+} { };
         };
     };
+};
+
+#FUNCTION {fMath}
+{
+    #MATH {result} {%0};
 };
