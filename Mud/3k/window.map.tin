@@ -1,0 +1,20 @@
+#VAR {mapBuffer} {};
+
+#ALIAS {.HandlerWindowMap}
+{
+    #NOP %1;
+    #IF {"$map[file]" == ""} #RETURN;
+    #IF {@fWindowActive{map}}
+    {
+        #MAP OFFSET {@fScreen{{right}{y}}} {@fScreen{{right}{x}}} {@fScreen{{right}{y2}}} {@fScreen{{right}{x2}}};
+        #MAP FLAG VTMAP ON;
+    };
+    #ELSE
+    {
+        #MAP FLAG VTMAP OFF;
+    };
+};
+event_register {e_map_refresh} {h_window_map} {.HandlerWindowMap};
+event_register {e_window_swap} {h_window_map} {.HandlerWindowMap};
+event_register {e_map_area_enter} {h_window_map} {.HandlerWindowMap};
+.WindowCreate {map};
