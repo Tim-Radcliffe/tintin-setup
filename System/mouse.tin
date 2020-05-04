@@ -62,11 +62,6 @@
     .debug MOUSE {SHORT CLICKED MOUSE BUTTON ONE: %0 : %1 : %2};
 };
 
-#NOP MAP MOUSE LOCATION     %0 vnum %1 location;
-#EVENT {MAP MOUSE LOCATION}
-{
-    .debug MOUSE {MAP MOUSE LOCATION: %0 : %1 : %2};
-};
 
 #NOP SWIPED <DIR>;                            
 #NOP           %0 dir %1 button %2 row %3 col %4 -row %5 -col %6 row %7 col %8 -row;
@@ -80,4 +75,26 @@
 #EVENT {TRIPLE-CLICKED}
 {
     .debug MOUSE {TRIPLE-CLICKED: %0 : %1 : %2};
+};
+
+
+#NOP MAP MOUSE
+
+
+#EVENT {MAP PRESSED MOUSE BUTTON ONE}
+{
+    event_raise {e_mouse_map_pressed} {1} {%0} {%1} {%2} {%3} {%4} {%5};
+    .debug MAP_MOUSE {MAP PRESSED MOUSE BUTTON ONE: %0 : %1 : %2 : %3 : %4 : %5};
+};
+
+#EVENT {MAP MOVED MOUSE BUTTON ONE}
+{
+    event_raise {e_mouse_map_moved} {1} {%0} {%1} {%2} {%3} {%4} {%5};
+    .debug MAP_MOUSE {MAP PRESSED MOUSE BUTTON ONE: %0 : %1 : %2 : %3 : %4 : %5};
+};
+
+#EVENT {MAP RELEASED MOUSE BUTTON ONE}
+{
+    event_raise {e_mouse_map_released} {1} {%0} {%1} {%2} {%3} {%4} {%5};
+    .debug MAP_MOUSE {MAP RELEASED MOUSE BUTTON ONE: %0 : %1 : %2 : %3 : %4 : %5};
 };
