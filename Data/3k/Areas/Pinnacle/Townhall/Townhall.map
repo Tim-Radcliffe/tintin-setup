@@ -1,0 +1,120 @@
+C 500
+
+CE <278>
+CH <118>
+CP <138>
+CR <178>
+CB 
+
+F 8
+
+I 1
+
+L ▪ ╹ ╺ ┗ ╻ ┃ ┏ ┣ ╸ ┛ ━ ┻ ┓ ┫ ┳ ╋ X
+
+
+R {    1} {0} {<068>} {Pinnacle Reception Hall} { } {		Pinnacle Reception Hall  You stand in a large reception hall.  A vaulted ceiling rises over your head to a height of nearly twenty feet. White marble is everywhere, the floors, the walls and even the ceiling are constructed from the beautiful stone. The flicker of bright candles illuminates the hall of the Player's Council to the west.  An elegant stairway ascends upwards towards the adventurers guild on the second floor of the building.  A similar staircase descends to the central council chamber and board rooms of the 3 Kingdoms below. A large archway opens to the east, leading out to Pinnacle's main street.  From the north, you hear the lively banter of the Kingdom's Clans and from the south comes the sounds of animated discussion of the players and wizards of 3K.  A bronze plaque has been set into the floor in the center of the room and a huge map of Pinnacle has been engraved on a raised dais nearby. } {} {} {} {} {1.000}
+E {    3} {u} {u} {16} {0} {}
+E {    4} {d} {d} {32} {0} {}
+E {    5} {n} {n} {1} {0} {}
+E {    6} {s} {s} {4} {0} {}
+E {    7} {w} {w} {8} {0} {}
+E {    2} {e} {.mapLink {Pinnacle} {} {e};} {2} {1} {}
+
+R {    2} {0} {<000>} {LINK: Pinnacle} {<138>*} {} {Pinnacle} {{link}{}} {} {} {1.000}
+E {    1} {w} {w} {8} {0} {}
+
+R {    3} {0} {<178>} {Level advancement room} { } {                  * Adventurers Guild *  This is the main hall of the Adventurers' Guild.  You can come here to advance your stats and level.  You may also get information about the various quests that exist in 3 Kingdoms, and the requirements you must fulfill to reach certain levels. To the east is the guild bulletin board, and to the west is the donation room.  A small man sits at a desk in the corner, acting as a scribe to record all transactions of consequence.   There's a small placard here. Commands: advance [level,str,con,int,wis,dex,cha]           cost, tally, required, questansi,           list [name -or- # -or- short] } {Adventurer} {} {} {} {1.000}
+E {    1} {d} {d} {32} {0} {}
+E {   11} {n} {n} {1} {0} {}
+E {   12} {w} {w} {8} {0} {}
+E {   13} {e} {e} {2} {0} {}
+
+R {    4} {0} {<178>} {Central Council Chamber} { } {		Central Council Chamber This is the room where many decisions are made concerning Three Kingdom's future.  Here, players can read and write on the various boards, giving their opinions about upcoming changes and new ideas. Nearly all of Three Kingdoms most prestigious citizens can be seen here at one time or another.  If you're lucky, you might even get to see one of the high wizards aimlessly roaming the halls (probably looking for the bathroom).  Also, this is where you learn about the different guilds available to the players here at 3 Kingdoms.  A large glass case in the center of the room contains each of the prospective guild objects.  There is a large sign here with arrows pointing in various directions. } {} {} {} {} {1.000}
+E {    1} {u} {u} {16} {0} {}
+E {   17} {d} {d} {32} {1} {}
+E {   18} {n} {n} {1} {0} {}
+E {   19} {s} {s} {4} {0} {}
+E {   20} {w} {w} {8} {0} {}
+E {   21} {e} {e} {2} {0} {}
+
+R {    5} {0} {<048>} {Pinnacle Reception Hall} { } {This is the entrance to the Clanworld. From within this large stone structure you hear the sounds of strong voices singing about the deeds of conquest and victory. Your blood pulses in time to the beat and you surge forward to join the action! If you do not belong to a Clan currently, take the opportunity to sign up!    There is a huge plaque next to the portcullis.  Type 'clanfix' to restore your clan symbol.   } {Clan World} {} {} {} {1.000}
+E {    1} {s} {s} {4} {0} {}
+
+R {    6} {0} {<178>} {Voluntary Access Fee Room} { } {} {} {} {} {} {1.000}
+E {    1} {n} {n} {1} {0} {}
+
+R {    7} {0} {<178>} {Player Review Boardroom} { } {Only those selected by the wizards of Three Kingdoms may even enter this portion of the large chamber.  A large oval desk resides within the room center, and a small notice board rests up against the northern wall.  Upon it are many announcements regarding the newest additions to the realms.  Lit sconces illuminate the room and an incense aroma floats through the air. } {Mud} {} {} {} {1.000}
+E {    1} {e} {e} {2} {0} {}
+E {    8} {n} {n} {1} {0} {}
+E {   10} {w} {w} {8} {0} {}
+E {    9} {s} {s} {4} {0} {}
+
+R {    8} {0} {<178>} {Interview Room} { } {Untainted by personal touches or frivolous decoration, this is a room designed purely for business. Centered in the middle is a long boardroom style table, which is encircled by evenly spaced chairs. The walls are washed with a calming blue and are unadorned by distracting ornamentation.} {} {} {} {} {1.000}
+E {    7} {s} {s} {4} {0} {}
+
+R {    9} {0} {<109>} {} { } {} {} {} {} {} {1.000}
+E {    7} {n} {n} {1} {0} {}
+
+R {   10} {0} {<109>} {} { } {} {} {} {} {} {1.000}
+E {    7} {e} {e} {2} {0} {}
+
+R {   11} {0} {<178>} {Android Guild Hall} { } {You are standing in a large room with 3 archways leading out to the west, east, and north, and a metal staircase leading down.  Back to the south is the Adventurer's guild.  There's a very important sign here for you to read.} {Adventurer} {} {} {} {1.000}
+E {    3} {s} {s} {4} {1} {}
+E {   14} {n} {n} {1} {0} {}
+E {   15} {w} {w} {8} {0} {}
+E {   16} {e} {e} {2} {0} {}
+E {   24} {d} {d} {32} {0} {}
+
+R {   12} {0} {<178>} {Level advancement room} { } {} {} {} {} {} {1.000}
+E {    3} {e} {e} {2} {0} {}
+
+R {   13} {0} {<178>} {Adventurer Board Room} { } {} {} {} {} {} {1.000}
+E {    3} {w} {w} {8} {0} {}
+
+R {   14} {0} {<068>} {Sorcerer Guild Hall} { } {The Guild Hall for the Sorcerer Guild  There's a small placard here. Commands: advance [level,str,con,int,wis,dex,cha]           cost, tally, required, questansi,           list [name -or- # -or- short] } {Sorcerer Guild} {} {} {} {1.000}
+E {   11} {s} {out} {4} {0} {}
+
+R {   15} {0} {<068>} {Fighter Guild Hall} { } {The guild hall is decorated with distinctive trophies that come from exotic places. The room is filled with weaponry decor which gives the feel of what could be utilized by a fighter. The armor statues line the hall in salute of the highest members of the guild who have achieved the status of Blade Master.  In the back of the room there is a large shelf filled with steins, and in the center of the room is an enormous oak table. There are many large wooden chairs that surround the table.  Against the eastern wall sits a row of kegs filled with ale.  A large chair, laced with the fur of a great bear,  sits at the head of the table. The brick floor is cracked in places from years of heavy boot traffic.  There's a small placard here. Commands: advance [level,str,con,int,wis,dex,cha]           cost, tally, required, questansi,           list [name -or- # -or- short] } {Fighter Guild} {} {} {} {1.000}
+E {   11} {e} {out} {2} {0} {}
+
+R {   16} {0} {<068>} {Cleric Guild Hall} { } {The Guild Hall for the Cleric Guild  There's a small placard here. Commands: advance [level,str,con,int,wis,dex,cha]           cost, tally, required, questansi,           list [name -or- # -or- short] } {Cleric} {} {} {} {1.000}
+E {   11} {w} {out} {8} {0} {}
+
+R {   17} {0} {<178>} {The Announcements Room} { } {This basement appears to have been recently constructed.  The roughly hewn stone walls and dark, dank surroundings seem to indicate that the work was done quickly and not terribly well. Lit torches adorn the walls and cast a shadowy light upon the room's only feature: a large bulletin board.  It is used by the wizards of Three Kingdoms to inform the players of any important changes and developments to the mud.} {} {} {} {} {1.000}
+E {    4} {u} {u} {16} {1} {}
+E {   23} {n} {n} {1} {0} {}
+E {   22} {s} {s} {4} {0} {}
+
+R {   18} {0} {<178>} {Rules Room} { } {		Rules Room This is the room where all of the various rules of 3 Kingdoms and their punishments are posted.  It is expected that you should know all of the rules posted on this board.  If you are caught breaking any of these rules, an 'I didn't know' will not be acceptable.  As you will note, the punishments tend to be rather harsh, conversely, the reporting of major bugs to high wizards will be rewarded. Just type 'look at board' to see the various topics covered.} {} {} {} {} {1.000}
+E {    4} {s} {s} {4} {0} {}
+
+R {   19} {0} {<178>} {Ideas Room} { } {This is the Ideas room for 3-Kingdoms.  If you think you have a great idea for the game, you may post it on the board for others to read, consider, and discuss.  All notes will be stored if this board becomes full.} {} {} {} {} {1.000}
+E {    4} {n} {n} {1} {0} {}
+E {   25} {d} {d} {32} {0} {}
+
+R {   20} {0} {<178>} {Help Room} { } {		Help Room This is the room where you may find out who to contact for specific information.  I'd highly suggest taking advantage of this board and getting all of your questions answered from the appropriate wizards. } {} {} {} {} {1.000}
+E {    4} {e} {e} {2} {0} {}
+
+R {   21} {0} {<109>} {} { } {} {} {} {} {} {1.000}
+E {    4} {w} {w} {8} {0} {}
+
+R {   22} {0} {<178>} {Discussion of the Portal MUD Client Area} { } {You stand in a small, grey stone room. There is little of interest here, little to detract from the opulent magnificence of the bulletin board in the centre of the room. Perhaps this is the intention - you are in this room to see and make use of the board, not to admire the furnishings.} {Mud} {} {} {} {1.000}
+E {   17} {n} {n} {1} {0} {}
+
+R {   23} {0} {<178>} {Quest Discussion Room} { } {	Welcome to the quest discussion room.  Here you can voice 	your thoughts on quest changes or simply ask questions. 	This is only a temporary room and it is to be used for 	constructive thoughts only. } {} {} {} {} {1.000}
+E {   17} {s} {s} {4} {0} {}
+E {   26} {n} {n} {1} {0} {}
+
+R {   24} {0} {<068>} {Android Guild Hall} { } {The Guild Hall for the Android Guild  There's a small placard here. Commands: advance [level,str,con,int,wis,dex,cha]           cost, tally, required, questansi,           list [name -or- # -or- short] } {Android Guild} {} {} {} {1.000}
+E {   11} {u} {out} {16} {0} {}
+
+R {   25} {0} {<178>} {Ideas Poll Room} { } {This is the Ideas poll room for 3-Kingdoms.  If you want to get a vote on an idea for the game, you may post it here.  All votes will be stored if this booth becomes full.} {} {} {} {} {1.000}
+E {   19} {u} {u} {16} {0} {}
+
+R {   26} {0} {<178>} {3-Kingdoms Explorer's Inn} { } {This wood paneled room deep under the adventurer's guild is where the top explorers of the Three Kingdoms come to register their exploits, share a tale or two, and prepare for their next adventure.  Type: 'explorer' to see your current rating, or       'explorers' to see the top 10. } {Mud} {} {} {} {1.000}
+E {   23} {s} {s} {4} {0} {}
+E {   27} {w} {w} {8} {0} {}
+
+R {   27} {0} {<178>} {The Area Changes Boardroom} { } {Freshly waxed hardwood floors shine dully in the light provided by floating globes that slowly make their way around the room. There's not a stick of furniture to be seen in this place, just walls and a ceiling painted a soothing shade of blue. The focal point of the room is a large bulletin board that practically demands your attention. Beside that board is an equally important sign.} {} {} {} {} {1.000}
+E {   26} {e} {e} {2} {0} {}
