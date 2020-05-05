@@ -1,5 +1,6 @@
 *.log
 *.swp
 *.save
+*.data.tin
 log.txt
 config.tin
