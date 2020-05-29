@@ -1,20 +1,61 @@
 #VAR {mapBuffer} {};
 
+#ALIAS {.HandlerWindowMapRoom}
+{
+    #NOP %1;
+    .WindowSetLine {map} {1} {AREA: $map[area][name]};
+    .WindowSetLine {map} {2} {NAME: $map[room][roomvnum]. $map[room][roomname]};
+    .WindowRefresh {map};
+};
+
 #ALIAS {.HandlerWindowMap}
 {
     #NOP %1;
+    .debug WINDOW_MAP {%0};
     #IF {"$map[file]" == ""} #RETURN;
-    #IF {@fWindowActive{map}}
+    #IF {"$_Window[maproom][on]" == "1"}
     {
-        #MAP OFFSET {@fScreen{{right}{y}}} {@fScreen{{right}{x}}} {@fScreen{{right}{y2}}} {@fScreen{{right}{x2}}};
-        #MAP FLAG VTMAP ON;
+        #VAR {_Window[maproom][y1]} {@fScreen{{right}{y}}};
+        #VAR {_Window[maproom][x1]} {@fScreen{{right}{x}}};
+        #MATH {_Window[maproom][y2]} {@fScreen{{right}{y}}+5};
+        #VAR {_Window[maproom][x2]} {@fScreen{{right}{x2}}};
+
+        #MATH {_Window[map][y1]} {@fScreen{{right}{y}}+6};
+        #VAR {_Window[map][x1]} {@fScreen{{right}{x}}};
+        #VAR {_Window[map][y2]} {@fScreen{{right}{y2}}};
+        #VAR {_Window[map][x2]} {@fScreen{{right}{x2}}};
     };
     #ELSE
     {
-        #MAP FLAG VTMAP OFF;
+        #VAR {_Window[map][y1]} {@fScreen{{right}{y}}};
+        #VAR {_Window[map][x1]} {@fScreen{{right}{x}}};
+        #VAR {_Window[map][y2]} {@fScreen{{right}{y2}}};
+        #VAR {_Window[map][x2]} {@fScreen{{right}{x2}}};
+    };
+    #SWITCH {"%1"}
+    {
+        #CASE {"e_mouse_map_pressed"}
+        {
+            #VAR {_Window[maproom][on]} {1};
+            event_register {e_map_room_enter} {h_window_map} {.HandlerWindowMapRoom};
+            .HandlerWindowMap;
+        };
+        #DEFAULT
+        {
+            #IF {@fWindowActive{map}}
+            {
+                #MAP OFFSET {$_Window[map][y1]} {$_Window[map][x1]} {$_Window[map][y2]} {$_Window[map][x2]};
+                #MAP FLAG VTMAP ON;
+            };
+            #ELSE
+            {
+                #MAP FLAG VTMAP OFF;
+            };
+        };
     };
 };
 event_register {e_map_refresh} {h_window_map} {.HandlerWindowMap};
 event_register {e_window_swap} {h_window_map} {.HandlerWindowMap};
 event_register {e_map_area_enter} {h_window_map} {.HandlerWindowMap};
+event_register {e_mouse_map_pressed} {h_window_map} {.HandlerWindowMap};
 .WindowCreate {map};

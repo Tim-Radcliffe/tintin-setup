@@ -116,6 +116,10 @@ event_register {e_room_enter} {h_map_room_exits} {.mapRoomExits};
 #ALIAS {.mapRoomArea}
 {
   #NOP %1;
+  #IF {"%1" == "e_map_area_leave"}
+  {
+    #UNVAR {room[location]};
+  };  
   #IF {"$map[edit]" == "1"}
   {
     #IF {"$room[location][name]" != ""}
@@ -123,8 +127,14 @@ event_register {e_room_enter} {h_map_room_exits} {.mapRoomExits};
       #MAP {set} {roomarea} {$room[location][name]};
       #ECHO {MAP : Area Set : $room[location][name]};
     };
+	#ELSE
+	{
+	  #SEND {!rating};
+	  #SEND {!where};
+	};
   };
 };
 event_register {e_command_rating} {h_map_room_area} {.mapRoomArea};
 event_register {e_command_where}  {h_map_room_area} {.mapRoomArea};
-
+event_register {e_map_area_leave} {h_map_room_area} {.mapRoomArea};
+event_register {e_room_enter}     {h_map_room_area} {.mapRoomArea};

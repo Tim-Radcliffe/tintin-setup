@@ -22,6 +22,7 @@
     #CLASS {config.tin} {WRITE} {config.tin};
 };
 
+#CLASS {$path[system]/debug.tin} {read} {$path[system]/debug.tin};
 #CLASS {$path[system]/files.tin} {read} {$path[system]/files.tin};
 #CLASS {$path[system]/csv.tin}   {read} {$path[system]/csv.tin};
 
@@ -113,8 +114,8 @@
 
 #EVENT {SESSION ACTIVATED}
 {
-  #INFO SESSION SAVE
-  #INFO SYSTEM SAVE
+  #INFO SESSION SAVE;
+  #INFO SYSTEM SAVE;
   #VAR {_info} {$info};
    #if {"%0" == "gts"} {.StartMenu}
 }

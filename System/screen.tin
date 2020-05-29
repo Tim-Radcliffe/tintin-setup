@@ -97,7 +97,7 @@
     {
         #IF {"%2" != ""}
         {
-            #RETURN {$_Screen[%1][%2]}
+            #RETURN {$_Screen[%1][%2]};
         };
         #RETURN {$_Screen[%1]};
     };

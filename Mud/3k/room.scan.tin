@@ -156,10 +156,12 @@ event_register {e_ansiflag_R} {h_room_name} {.HandlerRoomName};
   
   #FOREACH {*RoomScan[object][]} {v}
   {
+  
     #IF {"$RoomScan[break]" != "1"}
     {
       #REGEXP {%3} {{$v}}
       {
+        .debug PICKUP {MATCH ${v} : $RoomScan[object][${v}] : %3};
         #IF {"$RoomScan[object][$v]" == "-1"}
         {
           #UNVAR {RoomScan[commandbuffer]};
@@ -169,7 +171,8 @@ event_register {e_ansiflag_R} {h_room_name} {.HandlerRoomName};
           #IF {"$RoomScan[object][$v]" == "1"}
           {
             #VAR {RoomScan[commandbuffer]} {@fAutoGetCommand{%2}};
-          }
+          };
+		  #ELSE
           {
             #FORMAT {RoomScan[commandbuffer]} {$RoomScan[object][$v]} {%3};
           };
@@ -177,6 +180,7 @@ event_register {e_ansiflag_R} {h_room_name} {.HandlerRoomName};
       };
     };
   };
+
   
   #IF {"$RoomScan[commandbuffer]" != ""}
   {
@@ -200,76 +204,5 @@ event_register {e_ansiflag_R} {h_room_name} {.HandlerRoomName};
         #VAR {result} {${result};#SEND {!put %0 in bag};};
     };
 };
-auto {add} {bag} {#ACTION {There is not room for more.} {.bagswap}} {} {#UNACTION {There is not room for more.}};
-
-#ALIAS {.bagswap}
-{
-    #NOP %1;
-    #VAR {_gvBS} {9};
-    #IF {"%0" != ""}
-    {
-        #VAR {_gvBS} {%0};
-    };
-    #ELSEIF {"%0" == "1"}
-    {
-        auto bag off;
-    };
-    #ACTION {^You have no bag %d.}
-    {
-        .bagswap @fEval{%%1 - 1};
-    };
-    #ACTION {^You unkeep}
-    {
-        #UNACTION {^You have no bag %d.};
-        #SEND {!give bag $_gvBS to $my[name]};
-        #SEND {!keep bag};
-        #SEND {!keep bag $_gvBS};
-        #UNVAR {_gvBS};
-        #UNACTION {^You unkeep};
-    }; 
-    #SEND {!unkeep bag $_gvBS};
-};
-
-#ALIAS {autopickup}
-{
-  #IF {"%1" == "off" || "%1" == "stop"}
-  {
-    #VAR {flags[autopickup]} {0};
-    #ECHO {Auto Pickup Off};
-    #RETURN;
-  };
-  #IF {"%1" == "min"} {#VAR {flags[autopickup]} {0};};
-  #IF {"%1" == "full"} {#VAR {flags[autopickup]} {1};};
-
-  #SWITCH {"$flags[autopickup]"}
-  {
-    #CASE {"0"}
-    {
-      #VAR {flags[autopickup]} {1};
-      #ECHO {Auto Pickup Minimal};
-    }
-    #CASE {"1"}
-    {
-      #VAR {flags[autopickup]} {2};
-      #ECHO {Auto Pickup Full};
-    };
-    #CASE {"2"}
-    {
-      #VAR {flags[autopickup]} {1};
-      #ECHO {Auto Pickup Minimal};
-    };
-  };
-
-  #IF {$flags[autopickup] > 0 }
-  {
-    event_register e_room_item h_auto_pickup handler_room_pickup;
-  };
-  #ELSE
-  {
-    event_remove_handler h_auto_pickup;
-  };
-};
-
-autopickup min;
 #CLASS {cRoomScan} {close};
 

@@ -22,9 +22,15 @@
       #FOREACH {$_file[List][%*]} {_file[Name]} {#ECHO {$_file[Name]};};
       #UNVAR {_file};
     };
+	#CASE {"tree"}
+	{
+	  #VAR {_file[List]} {@fFileDirTree{%1}};
+      #FOREACH {$_file[List][%*]} {_file[Name]} {#ECHO {$_file[Name]};};
+      #UNVAR {_file};	  
+	};
     #DEFAULT 
     {
-      #ECHO {Unrecognised Command};
+      #ECHO {Recognised commands are load,loadall,read,list,tree};
     };
   };
 };
@@ -80,6 +86,11 @@
 #FUNCTION {fFileCreateDir}
 {
   #SCRIPT {mkdir -p "%1"};
+};
+
+#FUNCTION {fFileDirTree}
+{
+  #SCRIPT {result} {find "%1" -type d};
 };
 
 #FUNCTION {fFileGetPath}

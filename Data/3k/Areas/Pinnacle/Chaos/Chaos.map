@@ -14,11 +14,11 @@ CROOMS <178>
 CSYMBOLS <128>
 CUSER <258>
 
-F 8
+F 11
 
 G 0
 
-I 12
+I 99
 
 L {ASCII NESW LINE} {NO EXITS} {x}
 L {ASCII NESW LINE} {N} {o}
@@ -459,6 +459,7 @@ E {   89} {s} {s} {4} {0} {} {1.000} {}
 E {   91} {e} {e} {2} {0} {} {1.000} {}
 E {   90} {w} {.mapLink {Pinnacle/Chaos/Billy Bob's Big Top Circus} {} {w};} {8} {1} {} {1.000} {}
 E {  150} {ride cow} {.mapLink {Pinnacle/Chaos/CowVille} {} {ride cow};} {0} {1} {} {1.000} {}
+E {  187} {enter doorway} {.mapLink {Pinnacle/Chaos/B Sharp Jazz Club} {} {enter doorway};} {0} {1} {} {1.000} {}
 
 R {   46} {0} {<000>} {LINK: Pinnacle/Chaos/Veggie Garden} {<138>*} {} {Pinnacle/Chaos/Veggie Garden} {{link}{}} {} {} {1.000} {}
 E {   30} {e} {e} {2} {0} {} {1.000} {}
@@ -492,6 +493,8 @@ E {    4} {n} {n} {1} {0} {} {1.000} {}
 E {   57} {w} {.mapLink {Pinnacle/Chaos/Carina's Observatory} {} {w};} {8} {1} {} {1.000} {}
 E {   56} {s} {.mapLink {Pinnacle/Chaos/Forest of Wolves} {} {s};} {4} {1} {} {1.000} {}
 E {   58} {e} {.mapLink {Pinnacle/Chaos/Toy Store} {} {e};} {2} {1} {} {1.000} {}
+E {  185} {read chapter 3} {.mapLink {Pinnacle/Chaos/Humpty Dumpty} {} {read chapter 3};} {0} {1} {} {1.000} {}
+E {  186} {read chapter 1} {.mapLink {Pinnacle/Chaos/Old Woman in the Shoe} {} {read chapter 1};} {0} {1} {} {1.000} {}
 
 R {   55} {0} {<000>} {LINK: Pinnacle/Chaos/Leprechaun Village} {<138>*} {} {Pinnacle/Chaos/Leprechaun Village} {{link}{}} {} {} {1.000} {}
 E {    4} {w} {w} {8} {0} {} {1.000} {}
@@ -568,7 +571,7 @@ R {   73} {0} {<000>} {LINK: Pinnacle/Chaos/Cap'n Crunch Land} {<138>*} {} {Pinn
 R {   74} {0} {<000>} {LINK: Pinnacle/Chaos/Burdog Gorge} {<138>*} {} {Pinnacle/Chaos/Burdog Gorge} {{link}{}} {} {} {1.000} {}
 E {   23} {n} {n} {1} {0} {} {1.000} {}
 
-R {   75} {0} {<048>} {Eastwick} { } {This is the Eastwick road.  There is a path running south and another to the east.  There is also a big white portal here. Which way do you go, I do not know!} {} {} {} {} {1.000} {}
+R {   75} {0} {<178>} {Eastwick} { } {This is the Eastwick road.  There is a path running south and another to the east.  There is also a big white portal here. Which way do you go, I do not know!} {} {} {} {} {1.000} {}
 E {   66} {e} {e} {2} {0} {} {1.000} {}
 E {   77} {s} {s} {4} {0} {} {1.000} {}
 
@@ -626,6 +629,7 @@ R {   89} {0} {<068>} {Country Road} { } {You're on a small country road.  All y
 E {   45} {n} {n} {1} {0} {} {1.000} {}
 E {   92} {s} {s} {4} {0} {} {1.000} {}
 E {   93} {w} {.mapLink {Pinnacle/Chaos/Funkytown} {} {w};} {8} {1} {} {1.000} {}
+E {  188} {buy mentos} {.mapLink {Pinnacle/Chaos/Mentos} {} {buy mentos};} {0} {1} {} {1.000} {}
 
 R {   90} {0} {<000>} {LINK: Pinnacle/Chaos/Billy Bob's Big Top Circus} {<138>*} {} {Pinnacle/Chaos/Billy Bob's Big Top Circus} {{link}{}} {} {} {1.000} {}
 E {   45} {e} {e} {2} {0} {} {1.000} {}
@@ -659,9 +663,11 @@ E {  103} {s} {.mapLink {Pinnacle/Chaos/Chaos Cinemaplex} {} {s};} {4} {1} {} {1
 E {  163} {fix typo} {.mapLink {Pinnacle/Chaos/Dayln's Mind} {} {fix typo};} {0} {1} {} {1.000} {}
 E {  180} {skip rope} {.mapLink {Pinnacle/Chaos/Club Chaos} {} {skip rope};} {0} {1} {} {1.000} {}
 
-R {   97} {0} {<048>} {Swirling mist (sideways,out2,out1)} { } {You suddenly find yourself floating in a white, swirling mist.  There's  no sense of up or down, just two openings, like breaks in a cloud, where you can see out.  Strangely enough, there is a concrete ramp here that, as far as you can tell, leads sideways.} {} {} {} {} {1.000} {}
+R {   97} {0} {<068>} {Swirling mist (sideways,out2,out1)                          } { } {You suddenly find yourself floating in a white, swirling mist.  There's  no sense of up or down, just two openings, like breaks in a cloud, where you can see out.  Strangely enough, there is a concrete ramp here that, as far as you can tell, leads sideways.} {} {} {} {} {1.000} {}
 E {   92} {n} {out1} {1} {0} {} {1.000} {}
 E {   99} {s} {out2} {4} {0} {} {1.000} {}
+E {  189} {sideways} {.mapLink {Pinnacle/Chaos/Disney World} {} {sideways};} {0} {1} {} {1.000} {}
+E {  190} {press play} {.mapLink {Pinnacle/Chaos/The Secret of Nimh} {} {press play};} {0} {1} {} {1.000} {}
 
 R {   98} {0} {<178>} {Field of Daisies} { } {Blinding sunlight shines down on this lovely field of white and yellow daisies.  The flowers are everywhere, literally thousands of them. Buzzing about this fragrant patch of land are more dragonflies than you can count.  Watch out or they might fly right into you!} {} {} {} {} {1.000} {}
 E {   92} {e} {e} {2} {0} {} {1.000} {}
@@ -671,6 +677,7 @@ E {   97} {n} {n} {1} {0} {} {1.000} {}
 E {    1} {e} {e} {2} {1} {} {1.000} {}
 E {  100} {s} {.mapLink {Pinnacle/Chaos/Body Mansion} {} {s};} {4} {1} {} {1.000} {}
 E {  101} {w} {.mapLink {Pinnacle} {} {w};} {8} {1} {} {1.000} {}
+E {  191} {admire ring} {.mapLink {Pinnacle/Chaos/Browning Estate} {} {admire ring};} {0} {1} {} {1.000} {}
 
 R {  100} {0} {<000>} {LINK: Pinnacle/Chaos/Body Mansion} {<138>*} {} {Pinnacle/Chaos/Body Mansion} {{link}{}} {} {} {1.000} {}
 E {   99} {n} {n} {1} {0} {} {1.000} {}
@@ -938,3 +945,17 @@ R {  182} {0} {<000>} {LINK: Pinnacle/Chaos/Teenage Mutant Turtles} {<138>*} {} 
 R {  183} {0} {<000>} {LINK: Pinnacle/Chaos/Einstein's Cottage} {<138>*} {} {Pinnacle/Chaos/Einstein's Cottage} {{link}{}} {} {} {1.000} {}
 
 R {  184} {0} {<000>} {LINK: Pinnacle/Chaos/Ladder} {<138>*} {} {Pinnacle/Chaos/Ladder} {{link}{}} {} {} {1.000} {}
+
+R {  185} {0} {<000>} {LINK: Pinnacle/Chaos/Humpty Dumpty} {<138>*} {} {Pinnacle/Chaos/Humpty Dumpty} {{link}{}} {} {} {1.000} {}
+
+R {  186} {0} {<000>} {LINK: Pinnacle/Chaos/Old Woman in the Shoe} {<138>*} {} {Pinnacle/Chaos/Old Woman in the Shoe} {{link}{}} {} {} {1.000} {}
+
+R {  187} {0} {<000>} {LINK: Pinnacle/Chaos/B Sharp Jazz Club} {<138>*} {} {Pinnacle/Chaos/B Sharp Jazz Club} {{link}{}} {} {} {1.000} {}
+
+R {  188} {0} {<000>} {LINK: Pinnacle/Chaos/Mentos} {<138>*} {} {Pinnacle/Chaos/Mentos} {{link}{}} {} {} {1.000} {}
+
+R {  189} {0} {<000>} {LINK: Pinnacle/Chaos/Disney World} {<138>*} {} {Pinnacle/Chaos/Disney World} {{link}{}} {} {} {1.000} {}
+
+R {  190} {0} {<000>} {LINK: Pinnacle/Chaos/The Secret of Nimh} {<138>*} {} {Pinnacle/Chaos/The Secret of Nimh} {{link}{}} {} {} {1.000} {}
+
+R {  191} {0} {<000>} {LINK: Pinnacle/Chaos/Browning Estate} {<138>*} {} {Pinnacle/Chaos/Browning Estate} {{link}{}} {} {} {1.000} {}

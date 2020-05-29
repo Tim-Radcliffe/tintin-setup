@@ -22,6 +22,7 @@
     {
         #SEND {!get &2};
         #SEND {!stash &2};
+		sl &2;
     };
 };
 
@@ -159,7 +160,7 @@
             #ALIAS {handler_wrangle}
             {
                 #NOP %%%1;
-                .debug CRAFT {WRANGLE: %%%1 : %%%2};
+                .debug {CRAFT} {WRANGLE: %%%1 : %%%2};
                 #REGEXP {%%%2} {^chaos essence}
                 {
                     #SEND {!get essence};

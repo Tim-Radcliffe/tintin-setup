@@ -1,6 +1,8 @@
 #NOP .debug {command} {parameters};
 #ALIAS {.debug}
 {
+    #LIST {_debug[args]} CREATE {%0};
+
     #IF {"%0" == ""}
     {
         #ECHO {.debug list};

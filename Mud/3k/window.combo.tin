@@ -71,7 +71,7 @@
         #MAP MAP {@fScreen{{head}{rows}}} {${_WC[split][r]}} {LIST} {_WC[map]};
         #FOREACH {*_WC[map][]} {v}
         {
-            #REPLACE {_WC[map][$v]} {\\} {\\};
+#NOP            #REPLACE {_WC[map][$v]} {\\} {\\};
         };
     };
     #ELSE

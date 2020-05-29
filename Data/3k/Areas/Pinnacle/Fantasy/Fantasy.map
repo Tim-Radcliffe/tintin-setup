@@ -14,11 +14,11 @@ CROOMS <178>
 CSYMBOLS <128>
 CUSER <258>
 
-F 11
+F 10
 
 G 0
 
-I 315
+I 546
 
 L {ASCII NESW LINE} {NO EXITS} {x}
 L {ASCII NESW LINE} {N} {o}
@@ -216,7 +216,7 @@ L {MUDFONT CURVED} {N E} {\u2818}
 L {MUDFONT CURVED} {S E} {\u28A0}
 L {MUDFONT CURVED} {S W} {\u2844}
 L {MUDFONT CURVED} {N W} {\u2803}
-L {UNICODE GRAPHICS} {NO DIAGONAL} { }
+L {UNICODE GRAPHICS} {NO DIAGONAL} {}
 L {UNICODE GRAPHICS} {SE} {\u2E0C}
 L {UNICODE GRAPHICS} {NE} {\u2E1D}
 L {UNICODE GRAPHICS} {SE NE} {>}
@@ -2920,11 +2920,12 @@ E {  546} {w} {w} {8} {0} {} {1.000} {}
 E {  572} {n} {n} {1} {0} {} {1.000} {}
 E {  544} {e} {e} {2} {0} {} {1.000} {}
 
-R {  546} {0} {} {Hills} { } {Hills There are some footprints of a humanoid style here.  This is a grassy little hill with a small tree on it.  There is a piece of rock extending out of the ground.  Further to the north you see that the hills continue, while to the east you see a road.   } {} {} {} {} {1.000} {}
+R {  546} {0} {<068>} {Hills} { } {Hills The earth is very muddy in this area, and the ground makes a strange sucking sound whenever you take a step.  This is a hilly area with an occasional tree.  The ground gradually inclines here.  Further to the north and west you can see that the hills continue, while to the east you notice a road.  A henge is visible off to the northeast. } {} {} {} {} {1.000} {}
 E {  534} {s} {s} {4} {0} {} {1.000} {}
 E {  547} {n} {n} {1} {0} {} {1.000} {}
 E {  548} {w} {w} {8} {0} {} {1.000} {}
 E {  545} {e} {e} {2} {0} {} {1.000} {}
+E { 1278} {ne} {.mapLink {Pinnacle/Fantasy/A Quiet Henge} {} {ne};} {3} {1} {} {1.000} {}
 
 R {  547} {0} {<178>} {Hills} { } {Hills The earth is very muddy in this area, and the ground makes a strange sucking sound whenever you take a step.  There are some footprints of a humanoid style here.  You've entered some bumpy terrain which appears to increase further to the north.  Further to the west you note that the hills continue, while to the east you note a road.  The land tumbles downward, and soon you are at the bottom of a deep but easily scalable pit.  The grass grows unhindered here, below the rest of the land, but not much other flora lives here, as the high hills on every side keep light away most of the day, and the ground is oversaturated with waters which pour down into the lower land.  There appears to be a road off to the east.  In the other directions the land straightens out a bit, although still maintaining its uneveness. } {} {} {} {} {1.000} {}
 E {  546} {s} {s} {4} {0} {} {1.000} {}
@@ -2932,7 +2933,7 @@ E {  572} {e} {e} {2} {0} {} {1.000} {}
 E {  584} {n} {n} {1} {0} {} {1.000} {}
 E {  549} {w} {w} {8} {0} {} {1.000} {}
 
-R {  548} {0} {<178>} {Hills} { } {Hills This is a grassy little hill with a small tree on it.  The earth is very muddy in this area, and the ground makes a strange sucking sound whenever you take a step.  The ground gradually declines here.  Further to the east and west you can see that the hills continue.   } {} {} {} {} {1.000} {}
+R {  548} {0} {<178>} {Hills} { } {Hills There are some footprints of a humanoid style here.  The earth is very muddy in this area, and the ground makes a strange sucking sound whenever you take a step.  You've entered some bumpy terrain which appears to increase further to the north.  Further to the east you can see that the hills continue.   } {} {} {} {} {1.000} {}
 E {  546} {e} {e} {2} {0} {} {1.000} {}
 E {  533} {s} {s} {4} {0} {} {1.000} {}
 E {  549} {n} {n} {1} {0} {} {1.000} {}
@@ -6406,6 +6407,9 @@ R { 1275} {0} {<000>} {LINK: Pinnacle/Fantasy/Hermit Hut} {<138>*} {} {Pinnacle/
 R { 1276} {0} {<000>} {LINK: Pinnacle/Fantasy/Valley} {<138>*} {} {Pinnacle/Fantasy/Valley} {{link}{}} {} {} {1.000} {}
 
 R { 1277} {0} {<000>} {LINK: Pinnacle/Fantasy/Lair of the Matriarch} {<138>*} {} {Pinnacle/Fantasy/Lair of the Matriarch} {{link}{}} {} {} {1.000} {}
+
+R { 1278} {0} {<000>} {LINK: Pinnacle/Fantasy/A Quiet Henge} {<138>*} {} {Pinnacle/Fantasy/A Quiet Henge} {{link}{}} {} {} {1.000} {}
+E {  546} {sw} {sw} {12} {0} {} {1.000} {}
 
 R { 2000} {0} {<158>} {The entrance to Fantasy} {<138>?} {The road ends at a large portal here in the forest.  The portal itself is large and circular, with sprays of color shooting across it, and strange, mystical energy flickering within.  A road into Pinnacle lies to the east, while you can vaguely make out the outlines of a mysterious tower to the west. } {Mud} {{special}{}} {} {} {1.000} {}
 E {    1} {portal wayhaven} {portal wayhaven} {0} {0} {} {1.000} {}
