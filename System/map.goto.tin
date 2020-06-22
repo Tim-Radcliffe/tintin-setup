@@ -4,12 +4,15 @@
   #IF {"%1" == "stop"}
   {
     #UNVAR {map[run]};
-    #UNTICKER {tWalk};
-    #UNACTION {#END OF PATH.};
   };
   #ELSEIF {"%1" == "pause"}
   {
-    #UNTICKER {tWalk};
+    #VAR {map[run][pause]} {1};
+  };
+  #ELSEIF {"%1" == "unpause"}
+  {
+    #UNVAR {map[run][pause]};
+    .mapRun;
   };
   #ELSE
   {
@@ -17,14 +20,23 @@
     {
       #VAR {map[run][dest]} {%1};
       #MAP FIND $map[run][dest];
+      #PATH SAVE FORWARD {map[run][path]};
+      #LIST {map[run][path]} {CREATE} {$map[run][path]};
+      #VAR {map[run][position]} {1};
     };
-    #IF {"$map[run][dest]" != ""}
+    #IF {"$map[run][dest]" != "" && 
+         "$map[run][pause]" != "1" && 
+         $map[run][position] <= &map[run][path][]}
     {
-      #ACTION {#END OF PATH.}
-      {
-        .mapRun {stop};
-      };
-      #TICKER {tWalk} {#PATH {walk};} {0.01};
+      #PATH SAVE POSITION {map[run][position]};
+      #VAR {map[run][step]} {$map[run][path][$map[run][position]]};
+      #MAP EXIT {$map[run][step]} SAVE {map[run][command]};
+      #PATH WALK;
+      .mapRun;
+    };
+    #ELSEIF {$map[run][position] > &map[run][path][]}
+    {
+      #UNVAR {map[run]};
     };
   };
 };

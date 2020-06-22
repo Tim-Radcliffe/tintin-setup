@@ -143,8 +143,8 @@
 {
     #IF {"$map[file]" == ""} #RETURN;
     #NOP  #MATH {map[cols]} {$session[MapCols]-1};
-#NOP  #MATH {map[rows]} {$session[ScreenRows]};
-#NOP  #MAP MAP {${map[cols]}x${map[rows]}} {/tmp/map.txt} {a};
+    #NOP  #MATH {map[rows]} {$session[ScreenRows]};
+    #NOP  #MAP MAP {${map[cols]}x${map[rows]}} {/tmp/map.txt} {a};
     event_raise {e_map_refresh};
 };
 
@@ -327,7 +327,7 @@
     {
       %3;
     };
-    .mapRun;
+    .mapRun {unpause};
     #UNACTION {%2};
   } {1};
   #IF {"%1" != ""}
@@ -451,9 +451,34 @@
 #ALIAS {.mapFindMe}
 {
     #NOP %1;
+
+    #IF {&{_mFM[mapfile]} < 1}
+    {
+        #IF {"$room[location][name]" == ""}
+        {
+            #VAR {room[location][name]} {none};
+            #SEND {!rating};
+            event_oneshot {e_command_rating} {map.tin} {.mapFindMe};
+            #RETURN;
+        };
+        #ELSEIF {"$map[area][name]" != "$room[location][name]"}
+        {
+            #VAR {_mFM[mapfile]} {@fSearchArea{$room[location][name]}};
+            #IF {&_mFM[mapfile] == 1}
+            {
+                .mapLoad {$_mFM[mapfile][1]};
+                event_oneshot {e_prompt} {map.tin} {.mapFindMe};
+            };
+        };
+        #ELSE 
+        {
+            #VAR {_mFM[mapfile][1]} {$map[file]};
+        };
+    };
+
     #MAP {list} {roomname} {$room[name]} {roomexits} {$room[exits]} {variable} {_mFM[currRooms]};
     
-    #IF {&_mFM[linkRooms][] > 0 && &_mFM[currRooms][] > 1}
+    #IF {&_mFM[linkRooms][] > 0 && &_mFM[currRooms][] > 1 && &_mFM[currRooms][] < 500}
     {
         #VAR {_mFM[checkRooms]} {$_mFM[currRooms]};
         #UNVAR {_mFM[currRooms]};
@@ -471,7 +496,7 @@
         #ECHO {INFO: 1 match found - Located!};
         #MAP GOTO {*_mFM[currRooms][+1]};
         #UNVAR {_mFM};
-        event_remove_specific {e_roomscan_finished} {map.tin} {.mapFindMe};
+        event_remove_specific {e_roomscan_finished} {map.tin};
     };
     #ELSEIF {&_mFM[currRooms][] > 1}
     {
@@ -492,7 +517,7 @@
     {
         #ECHO {INFO: No Match Found};
         #UNVAR {_mFM};
-        event_remove_specific {e_roomscan_finished} {map.tin} {.mapFindMe};
+        event_remove_specific {e_roomscan_finished} {map.tin};
     };
 
 };
@@ -529,7 +554,7 @@
       {
         #SEND {!$map[specialexit][%2][%3][command]};
       };
-      .mapRun;
+      .mapRun {unpause};
       #UNACTION {$map[specialexit][%2][%3][trigger]};
     } {2};
   };
