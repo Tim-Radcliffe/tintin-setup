@@ -4,4 +4,4 @@
 *.data.tin
 log.txt
 config.tin
-Data/profiles.csv
+Data/*.*
